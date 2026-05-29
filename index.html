@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CROPNEX — Tecnologia Agrícola</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --black2:  #111111;
+      --black3:  #1a1a1a;
+      --gray1:   #232323;
+      --gray2:   #333333;
+      --gray3:   #555555;
+      --gray4:   #888888;
+      --gray5:   #bbbbbb;
+      --gray6:   #e5e5e5;
+      --white:   #ffffff;
+      --green:   #2d8a3e;
+      --green2:  #34a34f;
+      --green3:  #3dbe5e;
+      --green-dim: rgba(45,138,62,0.12);
+      --green-border: rgba(45,138,62,0.25);
+      --border:  rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --radius:  12px;
+      --radius-lg: 20px;
+      --font: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 60px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo img {
+      height: 28px;
+      filter: brightness(0) invert(1);
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray5);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-ghost {
+      color: var(--gray5);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--white); }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary:hover {
+      background: var(--green2);
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(45,138,62,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 800px 500px at 20% 80%, rgba(45,138,62,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 600px 400px at 80% 20%, rgba(45,138,62,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--green-border);
+      background: var(--green-dim);
+      color: var(--green3);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    .hero-badge span { width: 6px; height: 6px; background: var(--green3); border-radius: 50%; display: inline-block; }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 88px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+      margin-bottom: 24px;
+      background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      -webkit-text-fill-color: transparent;
+      background: linear-gradient(135deg, var(--green2) 0%, var(--green3) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--gray4);
+      max-width: 540px;
+      margin-bottom: 40px;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-large {
+      background: var(--green);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: 10px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 0 1px rgba(45,138,62,0.3), 0 8px 24px rgba(45,138,62,0.25);
+    }
+
+    .btn-large:hover {
+      background: var(--green2);
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 1px rgba(45,138,62,0.4), 0 12px 32px rgba(45,138,62,0.35);
+    }
+
+    .btn-outline {
+      color: var(--gray5);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 13px 28px;
+      border-radius: 10px;
+      border: 1px solid var(--border2);
+      transition: color 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .btn-outline:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      margin-top: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: var(--gray3);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--gray3));
+    }
+
+    /* ── SECTION BASE ── */
+    section { position: relative; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green3);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--green3);
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--gray4);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── SOBRE ── */
+    .sobre {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 64px;
+    }
+
+    .sobre-text p {
+      color: var(--gray4);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .sobre-text p strong { color: var(--white); font-weight: 600; }
+
+    .sobre-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pillar {
+      padding: 24px 28px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      transition: border-color 0.3s, background 0.3s;
+      cursor: default;
+    }
+
+    .pillar:hover {
+      border-color: var(--green-border);
+      background: var(--green-dim);
+    }
+
+    .pillar-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .pillar h4 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .pillar p {
+      font-size: 13px;
+      color: var(--gray4);
+    }
+
+    /* ── CRENÇA ── */
+    .crenca {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .crenca-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 64px;
+    }
+
+    .crenca-quote {
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .crenca-quote em {
+      font-style: normal;
+      color: var(--green3);
+    }
+
+    .crenca-body p {
+      color: var(--gray4);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    /* ── PRODUTOS ── */
+    .produtos {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .produtos-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+    }
+
+    .produtos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .produto-card {
+      background: var(--black2);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: background 0.3s;
+      cursor: default;
+      overflow: hidden;
+    }
+
+    .produto-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green-border), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .produto-card:hover {
+      background: var(--black3);
+    }
+
+    .produto-card:hover::before { opacity: 1; }
+
+    .produto-img-wrap {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .produto-img-wrap img {
+      height: 150px;
+      object-fit: contain;
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.5));
+    }
+
+    .produto-card:hover .produto-img-wrap img {
+      transform: translateY(-8px) scale(1.05);
+    }
+
+    .produto-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green3);
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .produto-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .produto-card p {
+      font-size: 13px;
+      color: var(--gray4);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .produto-dose {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .produto-dose span {
+      font-size: 11px;
+      color: var(--gray3);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .produto-dose strong {
+      font-size: 12px;
+      color: var(--gray5);
+      font-weight: 600;
+    }
+
+    /* ── ESTRATÉGIA ── */
+    .estrategia {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .estrategia-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-top: 64px;
+      background: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .step {
+      background: var(--black2);
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 32px;
+      padding: 32px 40px;
+      transition: background 0.25s;
+      cursor: default;
+    }
+
+    .step:hover { background: var(--black3); }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--green3);
+      text-transform: uppercase;
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      border-radius: 8px;
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 13px;
+      color: var(--gray4);
+      line-height: 1.6;
+    }
+
+    .step-products {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .step-pill {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--gray5);
+      background: var(--gray1);
+      border: 1px solid var(--border2);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .stat {
+      background: var(--black2);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--white) 0%, rgba(255,255,255,0.6) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .stat-value em {
+      font-style: normal;
+      -webkit-text-fill-color: transparent;
+      background: linear-gradient(135deg, var(--green2), var(--green3));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--gray4);
+      font-weight: 500;
+    }
+
+    /* ── CONTATO ── */
+    .contato {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .contato-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contato-info { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+
+    .contato-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .contato-item:hover {
+      border-color: var(--green-border);
+      background: var(--green-dim);
+    }
+
+    .contato-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--green-dim);
+      border: 1px solid var(--green-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .contato-item h5 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray4);
+      margin-bottom: 2px;
+    }
+
+    .contato-item a, .contato-item p {
+      font-size: 14px;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .contato-item a:hover { color: var(--green3); }
+
+    .contato-form {
+      background: var(--black2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+    }
+
+    .contato-form h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .contato-form > p {
+      font-size: 14px;
+      color: var(--gray4);
+      margin-bottom: 24px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray5);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--black3);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 11px 14px;
+      color: var(--white);
+      font-size: 14px;
+      font-family: var(--font);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--green);
+    }
+
+    .form-group textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-group select option { background: var(--black3); }
+
+    .form-submit {
+      width: 100%;
+      background: var(--green);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 13px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 4px;
+    }
+
+    .form-submit:hover {
+      background: var(--green2);
+      transform: translateY(-1px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-logo img {
+      height: 22px;
+      filter: brightness(0) invert(1);
+      opacity: 0.5;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--gray3);
+      font-size: 13px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gray5); }
+
+    .footer-copy {
+      color: var(--gray3);
+      font-size: 13px;
+    }
+
+    /* ── DIVIDER GRADIENT ── */
+    .gradient-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+      opacity: 0.3;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .section-inner { padding: 0 20px; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+      .crenca-inner { grid-template-columns: 1fr; gap: 32px; }
+      .produtos-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .step { grid-template-columns: 60px 1fr; }
+      .step-products { display: none; }
+      .contato-inner { grid-template-columns: 1fr; gap: 40px; }
+      .produtos-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+      footer { padding: 32px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 80px 20px 60px; }
+      .produtos-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .btn-large, .btn-outline { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="assets/logo.png" alt="CROPNEX" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#produtos">Produtos</a></li>
+      <li><a href="#estrategia">Estratégia</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="mailto:comercial@cropnex.com.br" class="btn-ghost">Falar com vendas</a>
+      <a href="#contato" class="btn-primary">Contato</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span></span>
+      Portfólio 2026
+    </div>
+    <h1>Tecnologia que<br/><em>transforma o campo.</em></h1>
+    <p>Adjuvantes, sanitizantes e biocidas naturais desenvolvidos para maximizar a performance dos defensivos e viabilizar uma produção sustentável.</p>
+    <div class="hero-actions">
+      <a href="#produtos" class="btn-large">Ver linha completa</a>
+      <a href="#contato" class="btn-outline">Falar com consultor →</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="section-inner">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-value"><em>11</em></div>
+          <div class="stat-label">Tecnologias na linha 2026</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value"><em>+40%</em></div>
+          <div class="stat-label">Aumento de mortalidade de pragas</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value"><em>+85%</em></div>
+          <div class="stat-label">Controle de doenças foliares em soja</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value"><em>0</em></div>
+          <div class="stat-label">Dias de carência — aplicável até a colheita</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre" id="sobre">
+    <div class="section-inner">
+      <div class="section-label">Quem Somos</div>
+      <h2 class="section-title">Tecnologia para uma<br/>produção sustentável.</h2>
+      <div class="sobre-grid">
+        <div class="sobre-text">
+          <p>A <strong>CROPNEX</strong> é uma empresa inovadora comprometida em viabilizar a <strong>produção sustentável</strong> na agricultura, promovendo soluções que respeitam as boas práticas agrícolas e contribuem para maior eficiência no campo.</p>
+          <p>Somos especializados em <strong>biocidas e compostos naturais</strong> utilizados na formulação de adjuvantes funcionais, desenvolvidos para oferecer ao produtor maior desempenho nas aplicações, melhor manejo de pragas e doenças, aumento da produtividade e redução do custo por hectare.</p>
+          <p>A linha CROPNEX foi desenhada para entregar o equilíbrio entre alta produtividade, tecnologia e responsabilidade socioambiental. <strong>CROPNEX é o parceiro ideal do campo para atingir recordes produtivos com sanidade da lavoura.</strong></p>
+        </div>
+        <div class="sobre-pillars">
+          <div class="pillar">
+            <div class="pillar-icon">⚡</div>
+            <h4>Tecnologia</h4>
+            <p>Uso inteligente dos recursos disponíveis para máxima eficiência no campo.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">📈</div>
+            <h4>Produtividade</h4>
+            <p>Menor custo por unidade produzida com resultados comprovados em campo.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">🌱</div>
+            <h4>Sustentabilidade</h4>
+            <p>Fazer mais com menos — produtos biodegradáveis, compatíveis com MIP e MID.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRENÇA -->
+  <section class="crenca">
+    <div class="section-inner">
+      <div class="section-label">No que acreditamos</div>
+      <div class="crenca-inner">
+        <div>
+          <h2 class="section-title">Inovando para uma<br/>produtividade <em style="-webkit-text-fill-color:inherit;color:var(--green3);">sustentável.</em></h2>
+          <p class="crenca-quote" style="margin-top:24px;">"É hora de produzir<br/>com mais eficiência."</p>
+        </div>
+        <div class="crenca-body">
+          <p>Acreditamos que o produtor brasileiro pode atingir altas produtividades com tecnologia, manejo e responsabilidade socioambiental.</p>
+          <p>Mais bioatividade dos fungicidas, mais penetração dos inseticidas, mais controle no manejo de doenças e pragas — sempre com matéria-prima selecionada, compatibilidade ampla com defensivos e bioinsumos, e compromisso com o meio ambiente.</p>
+          <p>Nossa linha foi desenhada para que cada produto potencialize o próximo, criando um sistema completo de alta performance para todas as culturas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <section class="produtos" id="produtos">
+    <div class="section-inner">
+      <div class="produtos-header">
+        <div>
+          <div class="section-label">Linha Completa 2026</div>
+          <h2 class="section-title">A linha CROPNEX</h2>
+          <p class="section-sub">Tecnologias para potencializar e proteger sua lavoura em todas as culturas e fases.</p>
+        </div>
+      </div>
+
+      <div class="produtos-grid">
+
+        <!-- INSECT -->
+        <div class="produto-card">
+          <div class="produto-img-wrap">
+            <img src="assets/products/insect.png" alt="CROPNEX INSECT" />
+          </div>
+          <div class="produto-tag">Inseticida Natural</div>
+          <h3>CROPNEX INSECT</h3>
+          <p>Adjuvante inteligente com alicina e d-limoneno que potencializa inseticidas, acaricidas e nematicidas. Atua sobre ovo, larva, ninfa e adulto — com efeito desalojante, expurgante e repelente.</p>
+          <div class="produto-dose">
+            <span>Dose grãos</span>
+            <strong>150 ml/ha</strong>
+          </div>
+        </div>
+
+        <!-- GREEN -->
+        <div class="produto-card">
+          <div class="produto-img-wrap">
+            <img src="assets/products/green.png" alt="CROPNEX GREEN" />
+          </div>
+          <div class="produto-tag">Repelente · Citronela 12%</div>
+          <h3>CROPNEX GREEN</h3>
+          <p>Adjuvante natural com 12% de óleo essencial de citronela. Cria barreiras sensoriais e olfativas que desorientam insetos mastigadores e sugadores, impedindo pouso, alimentação e oviposição.</p>
+          <div class="produto-dose">
+            <span>Dose grãos</span>
+            <strong>200 ml/ha</strong>
+          </div>
+        </div>
+
+        <!-- ORANGE -->
+        <div class="produto-card">
+          <div class="produto-img-wrap">
+            <img src="assets/products/orange.png" alt="CROPNEX ORANGE" />
+          </div>
+          <div class="produto-tag">Adjuvante · 21% D-Limoneno</div>
+          <h3>CROPNEX ORANGE</h3>
+          <p>Alta concentração de D-Limoneno (21%) extraído da casca da laranja. Entrega alta penetração cuticular, cobertura foliar e efeito expurgante, além de limpar tanques e equipamentos com eficiência.</p>
+          <div class="produto-dose">
+            <span>Dose grãos</span>
+            <strong>150 ml/ha</strong>
+          </div>
+        </div>
+
+        <!-- D-LIM -->
+        <div class="produto-card">
+          <div class="produto-img-wrap">
+            <img src="assets/products/dlim.png" alt="CROPNEX D-LIM" />
+          </div>
+          <div class="produto-tag">Terpenos Cítricos</div>
+          <h3>CROPNEX D-LIM</h3>
+          <p>À base de d-limoneno e citro-limoneno, reduz a tensão superficial da calda e entrega poder umectante de alta performance. Aumenta a uniformidade da pulverização e auxilia no controle de pragas e doenças.</p>
+          <div class="produto-dose">
+            <span>Dose calda</span>
+            <strong>50–100 ml/100L</strong>
+          </div>
+        </div>
+
+        <!-- OIL EC-70 -->
+        <div class="produto-card">
+          <div class="produto-img-wrap">
+            <img src="assets/products/oil-ec70.png" alt="CROPNEX OIL EC-70" />
+          </div>
+          <div class="produto-tag">Óleo Parafínico · Bi-Emulsionável</div>
+          <h3>CROPNEX OIL EC-70</h3>
+          <p>Adjuvante multifuncional com óleo mineral parafínico 99,99% puro e isento de fenol. Sistema bi-emulsionável entrega calda branca, homogênea e estável. Sem efeito-lupa — seguro em culturas sensíveis.</p>
+          <div class="produto-dose">
+            <span>Dose foliar</span>
+            <strong>150–300 ml/100L</strong>
+          </div>
+        </div>
+
+        <!-- PRIME -->
+        <div class="produto-card">
+          <div class="produto-img-wrap">
+            <img src="assets/products/prime.png" alt="CROPNEX PRIME" />
+          </div>
+          <div class="produto-tag">Fungicida + Bactericida Premium</div>
+          <h3>CROPNEX PRIME</h3>
+          <p>Sanitizante de alta performance com 5 ativos em sinergia: Cloreto Quaternário de Amônia 5ª geração, biguanida, óleo de laranja, surfactante e silicone. Ação mesossistêmica translaminar de amplo espectro.</p>
+          <div class="produto-dose">
+            <span>Dose soja/milho</span>
+            <strong>300 ml/ha</strong>
+          </div>
+        </div>
+
+        <!-- pH GUARD -->
+        <div class="produto-card">
+          <div class="produto-img-wrap">
+            <img src="assets/products/ph-guard.png" alt="CROPNEX pH GUARD" />
+          </div>
+          <div class="produto-tag">Redutor de pH · 5 Ações em 1</div>
+          <h3>CROPNEX pH GUARD</h3>
+          <p>Adjuvante multifuncional para preparo de calda: acidifica, tampona, sequestra dureza da água (Ca, Mg, Fe), confere ação antideriva e espalhante. Cinco ações em um único produto — sempre o primeiro no tanque.</p>
+          <div class="produto-dose">
+            <span>Dose geral</span>
+            <strong>30–50 ml/100L</strong>
+          </div>
+        </div>
+
+        <!-- 100 -->
+        <div class="produto-card">
+          <div class="produto-img-wrap">
+            <img src="assets/products/cropnex100.png" alt="CROPNEX 100" />
+          </div>
+          <div class="produto-tag">Sanitizante · Oxicloreto de Cálcio</div>
+          <h3>CROPNEX 100</h3>
+          <p>Sanitizante de contato à base de Ca(OCl)₂ com 65% de cloro ativo. Oxida células e esporos fúngicos e bactérias por choque imediato. Libera 22% de Cálcio. Carência zero — aplicável até o dia da colheita.</p>
+          <div class="produto-dose">
+            <span>Dose cereais</span>
+            <strong>100 g/ha</strong>
+          </div>
+        </div>
+
+        <!-- AG -->
+        <div class="produto-card">
+          <div class="produto-img-wrap">
+            <img src="assets/products/ag.png" alt="CROPNEX AG" />
+          </div>
+          <div class="produto-tag">Surfactante · Alta Persistência</div>
+          <h3>CROPNEX AG</h3>
+          <p>Sanitizante adjuvante com 45% de Cloreto de Alquil Dimetil Benzil Amônio. Controla fungos e bactérias e aumenta a área de contato gota-folha em até 400%. Alta persistência foliar e estabilização da calda.</p>
+          <div class="produto-dose">
+            <span>Grandes culturas</span>
+            <strong>500 ml/ha</strong>
+          </div>
+        </div>
+
+        <!-- ESPUME CONTROL -->
+        <div class="produto-card">
+          <div class="produto-img-wrap" style="opacity:0.4;">
+            <svg width="80" height="120" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="10" width="40" height="100" rx="8" fill="#333"/>
+              <rect x="28" y="60" width="24" height="30" rx="4" fill="#444"/>
+              <text x="40" y="80" text-anchor="middle" font-size="8" fill="#888" font-family="Inter">EC</text>
+            </svg>
+          </div>
+          <div class="produto-tag">Antiespumante · Silicone</div>
+          <h3>CROPNEX ESPUME CONTROL</h3>
+          <p>Antiespumante à base de polidimetilsiloxano (silicone ativado). Rompe bolhas em menos de 10 segundos no contato. Evita transbordamento e reduz perda de defensivos. Dose mínima — altíssima eficiência.</p>
+          <div class="produto-dose">
+            <span>Uso preventivo</span>
+            <strong>30–50 ml/100L</strong>
+          </div>
+        </div>
+
+        <!-- OIL PREMIUM -->
+        <div class="produto-card" style="grid-column: span 2;">
+          <div style="display:grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center;">
+            <div class="produto-img-wrap" style="height:140px; width:140px; margin:0;">
+              <img src="assets/products/oil-ec70.png" alt="CROPNEX OIL" style="height:130px;" />
+            </div>
+            <div>
+              <div class="produto-tag">Premium · Tecnologia Shell GTL</div>
+              <h3>CROPNEX OIL</h3>
+              <p style="font-size:13px;color:var(--gray4);line-height:1.65;margin-top:8px;">Óleo agrícola premium formulado com Tecnologia Shell — derivado do gás natural pelo processo GTL de condensação. Com 99,999% de pureza e 88,8% parafínico, é o óleo mais limpo do mercado. Isento de aminas, enxofre e fenol. Sem efeito-lupa — ideal para cultivos premium e certificações internacionais (GlobalGAP, Rainforest).</p>
+              <div class="produto-dose" style="margin-top:16px; padding-top:12px;">
+                <span>Concentração calda</span>
+                <strong>0,3% v/v</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTRATÉGIA -->
+  <section class="estrategia" id="estrategia">
+    <div class="section-inner">
+      <div class="section-label">Estratégia de Uso</div>
+      <h2 class="section-title">Como combinar a linha CROPNEX</h2>
+      <p class="section-sub">Uma sequência de aplicação otimizada que garante máxima eficiência — adapte com seu Engenheiro Agrônomo conforme cultura, alvo e fenologia.</p>
+
+      <div class="estrategia-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h4>Preparo da Calda</h4>
+            <p>Ajuste de pH, sequestro de dureza, antiespumante e antideriva. Adicione sempre primeiro, com agitação ligada.</p>
+          </div>
+          <div class="step-products">
+            <span class="step-pill">pH GUARD</span>
+            <span class="step-pill">ESPUME CONTROL</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h4>Adjuvantes &amp; Surfactantes</h4>
+            <p>Espalhamento, cobertura, penetração e bioatividade dos defensivos agrícolas.</p>
+          </div>
+          <div class="step-products">
+            <span class="step-pill">OIL</span>
+            <span class="step-pill">OIL EC-70</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h4>Potencializadores Cítricos</h4>
+            <p>Adjuvantes cítricos para reforço de penetração e performance dos defensivos, atuando como auxiliares do efeito biocida.</p>
+          </div>
+          <div class="step-products">
+            <span class="step-pill">ORANGE</span>
+            <span class="step-pill">D-LIM</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <h4>Bioadjuvantes Naturais</h4>
+            <p>Óleos vegetais biocidas que potencializam defensivos como inseticidas, nematicidas, fungicidas e bactericidas.</p>
+          </div>
+          <div class="step-products">
+            <span class="step-pill">INSECT</span>
+            <span class="step-pill">GREEN</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <div class="step-content">
+            <h4>Sanitizantes</h4>
+            <p>Choque + residual — fungicidas e bactericidas complementares para controle de amplo espectro.</p>
+          </div>
+          <div class="step-products">
+            <span class="step-pill">PRIME</span>
+            <span class="step-pill">100</span>
+            <span class="step-pill">AG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contato" id="contato">
+    <div class="section-inner">
+      <div class="contato-inner">
+        <div>
+          <div class="section-label">Contato</div>
+          <h2 class="section-title">Fale com<br/>a CROPNEX.</h2>
+          <p class="section-sub">Nossa equipe está pronta para ajudar você a escolher as melhores tecnologias para a sua lavoura.</p>
+          <div class="contato-info">
+            <div class="contato-item">
+              <div class="contato-icon">✉️</div>
+              <div>
+                <h5>Comercial</h5>
+                <a href="mailto:comercial@cropnex.com.br">comercial@cropnex.com.br</a>
+              </div>
+            </div>
+            <div class="contato-item">
+              <div class="contato-icon">🛠️</div>
+              <div>
+                <h5>Suporte Técnico</h5>
+                <a href="mailto:suporte@cropnex.com.br">suporte@cropnex.com.br</a>
+              </div>
+            </div>
+            <div class="contato-item">
+              <div class="contato-icon">🌐</div>
+              <div>
+                <h5>Website</h5>
+                <a href="http://www.cropnex.com.br" target="_blank">www.cropnex.com.br</a>
+              </div>
+            </div>
+            <div class="contato-item">
+              <div class="contato-icon">📱</div>
+              <div>
+                <h5>Instagram</h5>
+                <a href="https://instagram.com/cropnex_oficial" target="_blank">@cropnex_oficial</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contato-form">
+          <h3>Envie uma mensagem</h3>
+          <p>Responderemos em até 24 horas úteis.</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nome</label>
+              <input type="text" placeholder="Seu nome" />
+            </div>
+            <div class="form-group">
+              <label>Empresa</label>
+              <input type="text" placeholder="Fazenda / empresa" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" placeholder="seu@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Interesse</label>
+            <select>
+              <option value="">Selecione um produto...</option>
+              <option>CROPNEX INSECT</option>
+              <option>CROPNEX GREEN</option>
+              <option>CROPNEX ORANGE</option>
+              <option>CROPNEX D-LIM</option>
+              <option>CROPNEX OIL / OIL EC-70</option>
+              <option>CROPNEX PRIME</option>
+              <option>CROPNEX pH GUARD</option>
+              <option>CROPNEX 100</option>
+              <option>CROPNEX AG</option>
+              <option>CROPNEX ESPUME CONTROL</option>
+              <option>Linha completa</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mensagem</label>
+            <textarea placeholder="Descreva sua necessidade ou dúvida..."></textarea>
+          </div>
+          <button class="form-submit" type="submit">Enviar mensagem →</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <a href="#" class="footer-logo">
+        <img src="assets/logo.png" alt="CROPNEX" />
+      </a>
+      <ul class="footer-links">
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#estrategia">Estratégia</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="mailto:comercial@cropnex.com.br">comercial@cropnex.com.br</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 CROPNEX · Linha de adjuvantes, sanitizantes e bioativos para alta performance no campo.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
