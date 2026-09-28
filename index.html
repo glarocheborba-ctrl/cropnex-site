@@ -357,16 +357,7 @@ button{font-family:inherit}
 <sc-if value="{{ isConteudo }}" hint-placeholder-val="{{ false }}">
   <section data-screen-label="Conteúdo técnico" style="max-width:1240px;margin:0 auto;padding:80px 32px 96px">
     <div style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#3B9E33;margin-bottom:22px">{{ t.tech }}</div>
-    <h1 style="font:800 clamp(38px,5.5vw,64px)/.98 Archivo,sans-serif;letter-spacing:-.035em;color:#3A2E23;margin:0 0 48px;max-width:820px;text-wrap:balance">{{ t.techTitle }}</h1>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:26px">
-      <sc-for list="{{ posts }}" as="a" hint-placeholder-count="3">
-        <article class="cx-card" data-reveal style="display:flex;flex-direction:column;gap:16px;border-radius:14px">
-          <div style="aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:#efe7d8"><image-slot id="post-{{ a.id }}" shape="rect" placeholder="Imagem do artigo"></image-slot></div>
-          <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#B07A22">{{ a.cat }}</div>
-          <h3 style="font:700 22px/1.2 Archivo,sans-serif;letter-spacing:-.02em;color:#3A2E23;margin:0;text-wrap:balance">{{ a.t }}</h3>
-        </article>
-      </sc-for>
-    </div>
+    <h1 style="font:800 clamp(38px,5.5vw,64px)/.98 Archivo,sans-serif;letter-spacing:-.035em;color:#3A2E23;margin:0;max-width:820px;text-wrap:balance">{{ t.techTitle }}</h1>
   </section>
 </sc-if>
 
@@ -465,7 +456,6 @@ const T = {
     steps:[['Água corrigida','pH tamponado e dureza sequestrada (Ca, Mg, Fe) antes do ativo entrar no tanque.'],['Deriva controlada','Gotas mais uniformes e calda estável: o produto vai para a planta, não para o vento.'],['Cobertura e adesão','Tensão superficial reduzida, espalhamento maior e película que resiste à chuva e ao UV.'],['Penetração no tecido','A cera cuticular se dissolve e o ativo é absorvido mais rápido.']],
     numbers:['anos de mercado do Grupo Nexco','anos de atuação no agronegócio','adjuvantes na linha'],
     packs:['Frasco para teste e áreas menores.','Bombona para a safra em curso.','Bombona para operação em escala.'],
-    posts:[['Qualidade da calda','Como o pH e a dureza da água afetam o defensivo'],['Tecnologia de aplicação','Deriva: o que causa e como reduzir'],['Adjuvantes','Óleo mineral ou surfactante: quando usar cada um']],
     func:{surf:'Surfactante',oil:'Óleo mineral',water:'Condicionador de água',foam:'Antiespumante',sun:'Fotoproteção',nat:'Natural'},
     alvo:{fung:'Fungicida',inse:'Inseticida',herb:'Herbicida',nema:'Nematicida',bact:'Bactericida',plant:'Planta'},
   },
@@ -494,7 +484,6 @@ const T = {
     steps:[['Corrected water','Buffered pH and sequestered hardness (Ca, Mg, Fe) before the active ingredient enters the tank.'],['Controlled drift','More uniform droplets and a stable mix: the product goes to the plant, not the wind.'],['Coverage and adhesion','Lower surface tension, greater spreading and a film that resists rain and UV.'],['Tissue penetration','The cuticular wax dissolves and the active ingredient is absorbed faster.']],
     numbers:['years in the market (Grupo Nexco)','years in agribusiness','adjuvants in the line'],
     packs:['Bottle for trials and smaller areas.','Jug for the current season.','Jug for large-scale operations.'],
-    posts:[['Spray mix quality','How water pH and hardness affect crop protection products'],['Application technology','Drift: what causes it and how to reduce it'],['Adjuvants','Mineral oil or surfactant: when to use each']],
     func:{surf:'Surfactant',oil:'Mineral oil',water:'Water conditioner',foam:'Antifoam',sun:'Sun protection',nat:'Natural'},
     alvo:{fung:'Fungicide',inse:'Insecticide',herb:'Herbicide',nema:'Nematicide',bact:'Bactericide',plant:'Plant'},
   },
@@ -523,7 +512,6 @@ const T = {
     steps:[['Agua corregida','pH tamponado y dureza secuestrada (Ca, Mg, Fe) antes de que el activo entre al tanque.'],['Deriva controlada','Gotas más uniformes y caldo estable: el producto va a la planta, no al viento.'],['Cobertura y adherencia','Menor tensión superficial, mayor extensión y una película que resiste la lluvia y los UV.'],['Penetración en el tejido','La cera cuticular se disuelve y el activo se absorbe más rápido.']],
     numbers:['años de mercado del Grupo Nexco','años de actuación en el agronegocio','adyuvantes en la línea'],
     packs:['Frasco para pruebas y áreas pequeñas.','Bidón para la campaña en curso.','Bidón para operación a gran escala.'],
-    posts:[['Calidad del caldo','Cómo el pH y la dureza del agua afectan al fitosanitario'],['Tecnología de aplicación','Deriva: qué la causa y cómo reducirla'],['Adyuvantes','Aceite mineral o surfactante: cuándo usar cada uno']],
     func:{surf:'Surfactante',oil:'Aceite mineral',water:'Acondicionador de agua',foam:'Antiespumante',sun:'Fotoprotección',nat:'Natural'},
     alvo:{fung:'Fungicida',inse:'Insecticida',herb:'Herbicida',nema:'Nematicida',bact:'Bactericida',plant:'Planta'},
   },
@@ -659,7 +647,6 @@ class Component extends DCLogic {
         go:()=>k==='line' ? this.setState({view:'line'}) : this.setState({size:k, view:null}) })),
       sizeChips: ['1 L','5 L','20 L'].map(label=>({ label, ...this.chip(s.size===label), go:()=>this.setState({size:label, view:null}) })),
       waProduto: wa(t.waProd(cur.name, s.size)),
-      posts: [['ph'],['deriva'],['oleo']].map(([id],i)=>({ id, cat:t.posts[i][0], t:t.posts[i][1] })),
     };
   }
 }
