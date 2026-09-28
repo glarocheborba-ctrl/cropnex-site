@@ -456,7 +456,7 @@ const T = {
     steps:[['Água corrigida','pH tamponado e dureza sequestrada (Ca, Mg, Fe) antes do ativo entrar no tanque.'],['Deriva controlada','Gotas mais uniformes e calda estável: o produto vai para a planta, não para o vento.'],['Cobertura e adesão','Tensão superficial reduzida, espalhamento maior e película que resiste à chuva e ao UV.'],['Penetração no tecido','A cera cuticular se dissolve e o ativo é absorvido mais rápido.']],
     numbers:['anos de mercado do Grupo Nexco','anos de atuação no agronegócio','adjuvantes na linha'],
     packs:['Frasco para teste e áreas menores.','Bombona para a safra em curso.','Bombona para operação em escala.'],
-    func:{surf:'Surfactante',oil:'Óleo mineral',water:'Condicionador de água',foam:'Antiespumante',sun:'Fotoproteção',nat:'Natural'},
+    func:{surf:'Surfactante',oil:'Óleo mineral',water:'Condicionador de água',foam:'Antiespumante',deslo:'Desalojante',sun:'Fotoproteção',nat:'Natural'},
     alvo:{fung:'Fungicida',inse:'Inseticida',herb:'Herbicida',nema:'Nematicida',bact:'Bactericida',plant:'Planta'},
   },
   EN: {
@@ -484,7 +484,7 @@ const T = {
     steps:[['Corrected water','Buffered pH and sequestered hardness (Ca, Mg, Fe) before the active ingredient enters the tank.'],['Controlled drift','More uniform droplets and a stable mix: the product goes to the plant, not the wind.'],['Coverage and adhesion','Lower surface tension, greater spreading and a film that resists rain and UV.'],['Tissue penetration','The cuticular wax dissolves and the active ingredient is absorbed faster.']],
     numbers:['years in the market (Grupo Nexco)','years in agribusiness','adjuvants in the line'],
     packs:['Bottle for trials and smaller areas.','Jug for the current season.','Jug for large-scale operations.'],
-    func:{surf:'Surfactant',oil:'Mineral oil',water:'Water conditioner',foam:'Antifoam',sun:'Sun protection',nat:'Natural'},
+    func:{surf:'Surfactant',oil:'Mineral oil',water:'Water conditioner',foam:'Antifoam',deslo:'Dislodging agent',sun:'Sun protection',nat:'Natural'},
     alvo:{fung:'Fungicide',inse:'Insecticide',herb:'Herbicide',nema:'Nematicide',bact:'Bactericide',plant:'Plant'},
   },
   ES: {
@@ -512,7 +512,7 @@ const T = {
     steps:[['Agua corregida','pH tamponado y dureza secuestrada (Ca, Mg, Fe) antes de que el activo entre al tanque.'],['Deriva controlada','Gotas más uniformes y caldo estable: el producto va a la planta, no al viento.'],['Cobertura y adherencia','Menor tensión superficial, mayor extensión y una película que resiste la lluvia y los UV.'],['Penetración en el tejido','La cera cuticular se disuelve y el activo se absorbe más rápido.']],
     numbers:['años de mercado del Grupo Nexco','años de actuación en el agronegocio','adyuvantes en la línea'],
     packs:['Frasco para pruebas y áreas pequeñas.','Bidón para la campaña en curso.','Bidón para operación a gran escala.'],
-    func:{surf:'Surfactante',oil:'Aceite mineral',water:'Acondicionador de agua',foam:'Antiespumante',sun:'Fotoprotección',nat:'Natural'},
+    func:{surf:'Surfactante',oil:'Aceite mineral',water:'Acondicionador de agua',foam:'Antiespumante',deslo:'Desalojante',sun:'Fotoprotección',nat:'Natural'},
     alvo:{fung:'Fungicida',inse:'Insecticida',herb:'Herbicida',nema:'Nematicida',bact:'Bactericida',plant:'Planta'},
   },
 };
@@ -543,7 +543,7 @@ const PRODUCTS = [
     PT:{tag:'Óleo mineral',short:'Versão concentrada da linha OIL: máxima performance em menor dose.',what:'Óleo mineral concentrado da linha OIL, para máxima performance em menor dose.',benefits:['Menor dose por hectare','Melhora cobertura e absorção','Reduz perdas por evaporação']},
     EN:{tag:'Mineral oil',short:'Concentrated version of the OIL line: maximum performance at a lower rate.',what:'Concentrated mineral oil from the OIL line, for maximum performance at a lower rate.',benefits:['Lower rate per hectare','Improves coverage and absorption','Reduces evaporation losses']},
     ES:{tag:'Aceite mineral',short:'Versión concentrada de la línea OIL: máximo rendimiento con menor dosis.',what:'Aceite mineral concentrado de la línea OIL, para máximo rendimiento con menor dosis.',benefits:['Menor dosis por hectárea','Mejora cobertura y absorción','Reduce pérdidas por evaporación']} },
-  { slug:'insect', name:'CROPNEX INSECT', func:'surf', alvos:['inse','nema'], dose:'100–250 ml/ha',
+  { slug:'insect', name:'CROPNEX INSECT', func:['deslo','nat'], alvos:['inse','nema'], dose:'100–250 ml/ha',
     PT:{tag:'Inseticidas e nematicidas',short:'Desaloja e expõe a praga, ampliando a ação sobre ovos, larvas, ninfas e adultos.',what:'Adjuvante para inseticidas e nematicidas. Desaloja e expõe a praga, ampliando a ação do inseticida.',benefits:['Desaloja e expõe a praga','Ação sobre ovos, larvas, ninfas e adultos','Amplia o efeito do inseticida']},
     EN:{tag:'Insecticides and nematicides',short:'Dislodges and exposes the pest, extending action on eggs, larvae, nymphs and adults.',what:'Adjuvant for insecticides and nematicides. It dislodges and exposes the pest, extending the insecticide action.',benefits:['Dislodges and exposes the pest','Acts on eggs, larvae, nymphs and adults','Extends the insecticide effect']},
     ES:{tag:'Insecticidas y nematicidas',short:'Desaloja y expone la plaga, ampliando la acción sobre huevos, larvas, ninfas y adultos.',what:'Adyuvante para insecticidas y nematicidas. Desaloja y expone la plaga, ampliando la acción del insecticida.',benefits:['Desaloja y expone la plaga','Acción sobre huevos, larvas, ninfas y adultos','Amplía el efecto del insecticida']} },
@@ -564,7 +564,7 @@ const PRODUCTS = [
     EN:{tag:'Sun protection',short:'Reduces heat stress and radiation, preventing sunburn.',what:'Protectant that reduces heat stress and radiation on the plant, preventing sunburn.',benefits:['Reduces heat stress','Protects against excess radiation','Prevents sunburn on fruit and leaves']},
     ES:{tag:'Fotoprotección',short:'Reduce el estrés térmico y la radiación, previniendo quemaduras.',what:'Protector que reduce el estrés térmico y la radiación sobre la planta, previniendo quemaduras de sol.',benefits:['Reduce el estrés térmico','Protege contra la radiación excesiva','Previene quemaduras en frutos y hojas']} },
 ];
-const FUNCS = ['surf','oil','water','foam','sun','nat'];
+const FUNCS = ['surf','oil','water','foam','deslo','sun','nat'];
 const ALVOS = ['fung','inse','herb','nema','bact'];
 const FEATURED = ['prime','insect','green'];
 const PAGES = ['home','empresa','produtos','conteudo','downloads','contato'];
@@ -597,7 +597,7 @@ class Component extends DCLogic {
   decorate(p, i, L, t){
     const base = `assets/produtos/${p.slug}/`;
     const c = p[L] || p.PT;
-    return { slug:p.slug, name:p.name, func:p.func, alvos:p.alvos, tag:c.tag, short:c.short, what:c.what, benefits:c.benefits,
+    return { slug:p.slug, name:p.name, funcs:[].concat(p.func), alvos:p.alvos, tag:c.tag, short:c.short, what:c.what, benefits:c.benefits,
       dose: typeof p.dose === 'string' ? p.dose : p.dose[L],
       num:String(i+1).padStart(2,'0'), open:()=>this.go('produto', p.slug),
       img: base+'x.png', img1l: base+'2.png',
@@ -610,7 +610,7 @@ class Component extends DCLogic {
     const L = T[s.lang] ? s.lang : 'PT';
     const t = T[L];
     const all = PRODUCTS.map((p,i)=>this.decorate(p,i,L,t));
-    const filtered = all.filter(p => (!s.func || p.func===s.func) && (!s.alvo || p.alvos.includes(s.alvo)));
+    const filtered = all.filter(p => (!s.func || p.funcs.includes(s.func)) && (!s.alvo || p.alvos.includes(s.alvo)));
     const cur = all.find(p=>p.slug===s.slug) || all[0];
     const related = all.filter(p=>p.slug!==cur.slug && p.alvos.some(a=>cur.alvos.includes(a))).slice(0,3);
     const navPage = s.page==='produto' ? 'produtos' : s.page;
