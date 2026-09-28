@@ -130,7 +130,7 @@ button{font-family:inherit}
   </section>
   <section style="border-top:1px solid #e0d8c8;border-bottom:1px solid #e0d8c8;background:#FBF7F0">
     <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-      <sc-for list="{{ numbers }}" as="k" hint-placeholder-count="4">
+      <sc-for list="{{ numbers }}" as="k" hint-placeholder-count="3">
         <div style="padding:40px 32px;border-right:1px solid #e6ddcd">
           <div style="font:800 52px/1 Archivo,sans-serif;letter-spacing:-.04em;color:#3A2E23">{{ k.v }}</div>
           <div style="font:400 14px/1.45 Archivo,sans-serif;color:#8d7f6d;margin-top:10px">{{ k.l }}</div>
@@ -371,7 +371,7 @@ const T = {
     companyTitle:'A marca de adjuvantes do Grupo Nexco',
     companyP1:'A Cropnex é a marca de adjuvantes agrícolas do Grupo Nexco, que soma mais de 25 anos de mercado e 12 anos de atuação no agronegócio.',
     companyP2:'Nossa linha prepara a calda e otimiza as condições de aplicação: corrige a água, reduz a deriva e melhora o espalhamento e a adesão à folha.',
-    companyP3:'Produção própria, com registro no MAPA, para revendas e produtores que querem fazer cada aplicação render mais.',
+    companyP3:'Produção própria, para revendas e produtores que querem fazer cada aplicação render mais.',
     companyCta:'Conheça a Cropnex', empresaTitle:'Cada aplicação rendendo mais.', packsTitle:'Embalagens para cada operação',
     prodEyebrow:'Linha de produtos', prodTitle:'11 adjuvantes, um para cada etapa.', prodText:'Do tanque à folha. Todos disponíveis em embalagens de 1 L, 5 L e 20 L.',
     fFunc:'Função', fAlvo:'Alvo', clear:'Limpar filtros', details:'Detalhes →', empty:'Nenhum produto com essa combinação.',
@@ -386,7 +386,7 @@ const T = {
     waHello:'Olá! Vim pelo site da Cropnex e gostaria de falar com o comercial.',
     waProd:(p,s)=>`Olá! Tenho interesse no ${p} (embalagem ${s}).`, waFispq:(p)=>`Olá! Gostaria da FISPQ do ${p}.`,
     steps:[['Água corrigida','pH tamponado e dureza sequestrada (Ca, Mg, Fe) antes do ativo entrar no tanque.'],['Deriva controlada','Gotas mais uniformes e calda estável: o produto vai para a planta, não para o vento.'],['Cobertura e adesão','Tensão superficial reduzida, espalhamento maior e película que resiste à chuva e ao UV.'],['Penetração no tecido','A cera cuticular se dissolve e o ativo é absorvido mais rápido.']],
-    numbers:['anos de mercado do Grupo Nexco','anos de atuação no agronegócio','adjuvantes na linha','produção própria com registro'],
+    numbers:['anos de mercado do Grupo Nexco','anos de atuação no agronegócio','adjuvantes na linha'],
     packs:['Frasco para teste e áreas menores.','Bombona para a safra em curso.','Bombona para operação em escala.'],
     posts:[['Qualidade da calda','Como o pH e a dureza da água afetam o defensivo'],['Tecnologia de aplicação','Deriva: o que causa e como reduzir'],['Adjuvantes','Óleo mineral ou surfactante: quando usar cada um']],
     func:{surf:'Surfactante',oil:'Óleo mineral',water:'Condicionador de água',foam:'Antiespumante',sun:'Fotoproteção',nat:'Natural'},
@@ -400,7 +400,7 @@ const T = {
     companyTitle:'The adjuvant brand of Grupo Nexco',
     companyP1:'Cropnex is the agricultural adjuvant brand of Grupo Nexco, with more than 25 years in the market and 12 years in agribusiness.',
     companyP2:'Our line prepares the spray mix and optimizes application conditions: it corrects the water, reduces drift and improves spreading and leaf adhesion.',
-    companyP3:'In-house production, registered with MAPA, for resellers and growers who want every application to deliver more.',
+    companyP3:'In-house production for resellers and growers who want every application to deliver more.',
     companyCta:'Meet Cropnex', empresaTitle:'Every application delivering more.', packsTitle:'Packaging for every operation',
     prodEyebrow:'Product line', prodTitle:'11 adjuvants, one for each step.', prodText:'From tank to leaf. All available in 1 L, 5 L and 20 L packaging.',
     fFunc:'Function', fAlvo:'Target', clear:'Clear filters', details:'Details →', empty:'No products match this combination.',
@@ -415,7 +415,7 @@ const T = {
     waHello:'Hello! I found the Cropnex website and would like to talk to sales.',
     waProd:(p,s)=>`Hello! I am interested in ${p} (${s} pack).`, waFispq:(p)=>`Hello! I would like the SDS for ${p}.`,
     steps:[['Corrected water','Buffered pH and sequestered hardness (Ca, Mg, Fe) before the active ingredient enters the tank.'],['Controlled drift','More uniform droplets and a stable mix: the product goes to the plant, not the wind.'],['Coverage and adhesion','Lower surface tension, greater spreading and a film that resists rain and UV.'],['Tissue penetration','The cuticular wax dissolves and the active ingredient is absorbed faster.']],
-    numbers:['years in the market (Grupo Nexco)','years in agribusiness','adjuvants in the line','registered in-house production'],
+    numbers:['years in the market (Grupo Nexco)','years in agribusiness','adjuvants in the line'],
     packs:['Bottle for trials and smaller areas.','Jug for the current season.','Jug for large-scale operations.'],
     posts:[['Spray mix quality','How water pH and hardness affect crop protection products'],['Application technology','Drift: what causes it and how to reduce it'],['Adjuvants','Mineral oil or surfactant: when to use each']],
     func:{surf:'Surfactant',oil:'Mineral oil',water:'Water conditioner',foam:'Antifoam',sun:'Sun protection',nat:'Natural'},
@@ -429,7 +429,7 @@ const T = {
     companyTitle:'La marca de adyuvantes del Grupo Nexco',
     companyP1:'Cropnex es la marca de adyuvantes agrícolas del Grupo Nexco, que suma más de 25 años de mercado y 12 años de actuación en el agronegocio.',
     companyP2:'Nuestra línea prepara el caldo y optimiza las condiciones de aplicación: corrige el agua, reduce la deriva y mejora la extensión y la adherencia a la hoja.',
-    companyP3:'Producción propia, con registro en el MAPA, para distribuidores y productores que quieren que cada aplicación rinda más.',
+    companyP3:'Producción propia, para distribuidores y productores que quieren que cada aplicación rinda más.',
     companyCta:'Conozca Cropnex', empresaTitle:'Cada aplicación rindiendo más.', packsTitle:'Envases para cada operación',
     prodEyebrow:'Línea de productos', prodTitle:'11 adyuvantes, uno para cada etapa.', prodText:'Del tanque a la hoja. Todos disponibles en envases de 1 L, 5 L y 20 L.',
     fFunc:'Función', fAlvo:'Objetivo', clear:'Limpiar filtros', details:'Detalles →', empty:'Ningún producto con esta combinación.',
@@ -444,7 +444,7 @@ const T = {
     waHello:'¡Hola! Vi el sitio de Cropnex y me gustaría hablar con el área comercial.',
     waProd:(p,s)=>`¡Hola! Tengo interés en ${p} (envase ${s}).`, waFispq:(p)=>`¡Hola! Quisiera la FDS de ${p}.`,
     steps:[['Agua corregida','pH tamponado y dureza secuestrada (Ca, Mg, Fe) antes de que el activo entre al tanque.'],['Deriva controlada','Gotas más uniformes y caldo estable: el producto va a la planta, no al viento.'],['Cobertura y adherencia','Menor tensión superficial, mayor extensión y una película que resiste la lluvia y los UV.'],['Penetración en el tejido','La cera cuticular se disuelve y el activo se absorbe más rápido.']],
-    numbers:['años de mercado del Grupo Nexco','años de actuación en el agronegocio','adyuvantes en la línea','producción propia con registro'],
+    numbers:['años de mercado del Grupo Nexco','años de actuación en el agronegocio','adyuvantes en la línea'],
     packs:['Frasco para pruebas y áreas pequeñas.','Bidón para la campaña en curso.','Bidón para operación a gran escala.'],
     posts:[['Calidad del caldo','Cómo el pH y la dureza del agua afectan al fitosanitario'],['Tecnología de aplicación','Deriva: qué la causa y cómo reducirla'],['Adyuvantes','Aceite mineral o surfactante: cuándo usar cada uno']],
     func:{surf:'Surfactante',oil:'Aceite mineral',water:'Acondicionador de agua',foam:'Antiespumante',sun:'Fotoprotección',nat:'Natural'},
@@ -552,7 +552,7 @@ class Component extends DCLogic {
       waLink: wa(t.waHello),
       steps: t.steps.map(([tt,d],i)=>({ n:String(i+1).padStart(2,'0'), t:tt, d })),
       featured: all.filter(p=>FEATURED.includes(p.slug)),
-      numbers: ['25+','12','11','MAPA'].map((v,i)=>({ v, l:t.numbers[i] })),
+      numbers: ['25+','12','11'].map((v,i)=>({ v, l:t.numbers[i] })),
       packs: [['1l','1 L','2'],['5l','5 L','1'],['20l','20 L','3']].map(([id,size,f],i)=>({ id, size, src:`assets/produtos/prime/${f}.png`, use:t.packs[i] })),
       products: all,
       filtered, isEmpty: filtered.length===0,
