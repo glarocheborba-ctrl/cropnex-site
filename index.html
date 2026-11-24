@@ -76,6 +76,14 @@ button{font-family:inherit}
 .cx-step .num{transition:background .4s,color .4s}
 .cx-step:hover .num{background:#3B9E33;color:#fff}
 
+/* Selo de novidade (o display vem do produto: inline-flex ou none) e grade de destaques da home */
+.cx-novo{align-items:center;gap:7px;font:700 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:#3B9E33;padding:7px 11px 7px 9px;border-radius:99px;white-space:nowrap}
+.cx-novo::before{content:'';width:6px;height:6px;border-radius:50%;background:#C9E5AE}
+.cx-card .cx-novo{position:absolute;top:14px;left:14px;z-index:1}
+.cx-feat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+@media (max-width:1100px){.cx-feat{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.cx-feat{grid-template-columns:1fr}}
+
 /* WhatsApp flutuante */
 .cx-wa{transition:transform .35s var(--cx-ease);background:#3B9E33 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z'/%3E%3C/svg%3E") center/28px 28px no-repeat !important}
 .cx-wa:hover{transform:scale(1.08)}
@@ -161,10 +169,10 @@ button{font-family:inherit}
         <h2 style="font:700 clamp(34px,4vw,48px)/1.05 Archivo,sans-serif;letter-spacing:-.03em;color:#3A2E23;margin:0">{{ t.featTitle }}</h2>
         <a onClick="{{ goProdutos }}" style="font:600 14px/1 Archivo,sans-serif;color:#B07A22">{{ t.featAll }}</a>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px">
-        <sc-for list="{{ featured }}" as="p" hint-placeholder-count="3">
+      <div class="cx-feat">
+        <sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
           <article class="cx-card" data-reveal style="background:#FBF7F0;border:1px solid #e6ddcd;border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
-            <a onClick="{{ p.open }}" style="display:flex;align-items:center;justify-content:center;height:260px;background:#efe7d8;padding:20px;box-sizing:border-box"><img src="{{ p.img }}" alt="{{ p.name }}" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></a>
+            <a onClick="{{ p.open }}" style="position:relative;display:flex;align-items:center;justify-content:center;height:260px;background:#efe7d8;padding:20px;box-sizing:border-box"><span class="cx-novo" style="display:{{ p.newDisp }}">{{ t.novo }}</span><img src="{{ p.img }}" alt="{{ p.name }}" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></a>
             <div style="padding:26px 24px 26px;flex:1;display:flex;flex-direction:column">
               <div style="font:500 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#3B9E33;margin-bottom:13px">{{ p.tag }}</div>
               <h3 style="font:700 26px/1.05 Archivo,sans-serif;letter-spacing:-.025em;color:#3A2E23;margin:0 0 12px">{{ p.name }}</h3>
@@ -264,7 +272,8 @@ button{font-family:inherit}
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px">
       <sc-for list="{{ filtered }}" as="p" hint-placeholder-count="6">
         <article class="cx-card" data-reveal style="background:#FBF7F0;border:1px solid #e6ddcd;border-radius:18px;overflow:hidden;display:flex;flex-direction:column">
-          <a onClick="{{ p.open }}" style="display:flex;align-items:center;justify-content:center;height:220px;background:#efe7d8;padding:18px;box-sizing:border-box">
+          <a onClick="{{ p.open }}" style="position:relative;display:flex;align-items:center;justify-content:center;height:220px;background:#efe7d8;padding:18px;box-sizing:border-box">
+            <span class="cx-novo" style="display:{{ p.newDisp }}">{{ t.novo }}</span>
             <img src="{{ p.img }}" alt="{{ p.name }}" style="max-width:100%;max-height:100%;object-fit:contain;display:block">
           </a>
           <div style="padding:22px 22px 22px;flex:1;display:flex;flex-direction:column">
@@ -302,7 +311,7 @@ button{font-family:inherit}
       </div>
     </div>
     <div data-reveal>
-      <div style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#3B9E33;margin-bottom:18px">{{ cur.tag }}</div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px"><span class="cx-novo" style="display:{{ cur.newDisp }}">{{ t.novo }}</span><span style="font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#3B9E33">{{ cur.tag }}</span></div>
       <h1 style="font:800 clamp(38px,5vw,60px)/.98 Archivo,sans-serif;letter-spacing:-.035em;color:#3A2E23;margin:0 0 22px">{{ cur.name }}</h1>
       <p style="font:400 19px/1.6 Archivo,sans-serif;color:#3A2E23;margin:0 0 34px;text-wrap:pretty">{{ cur.what }}</p>
 
@@ -370,7 +379,7 @@ button{font-family:inherit}
     <h1 style="font:800 clamp(38px,5.5vw,60px)/.98 Archivo,sans-serif;letter-spacing:-.035em;color:#3A2E23;margin:0 0 20px">{{ t.docsTitle }}</h1>
     <p style="font:400 17px/1.6 Archivo,sans-serif;color:#6b5c4a;margin:0 0 44px;max-width:560px">{{ t.docsText }}</p>
     <div style="border-top:1px solid #e0d8c8">
-      <sc-for list="{{ products }}" as="p" hint-placeholder-count="11">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="12">
         <div data-reveal style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid #e0d8c8;flex-wrap:wrap">
           <div style="display:flex;align-items:baseline;gap:18px"><span style="font:500 11px/1 'JetBrains Mono',monospace;color:#b3a58f">{{ p.num }}</span><span style="font:700 18px/1.2 Archivo,sans-serif;color:#3A2E23">{{ p.name }}</span><span style="font:400 13px/1 Archivo,sans-serif;color:#8d7f6d">{{ p.tag }}</span></div>
           <div style="display:flex;gap:10px">
@@ -460,6 +469,7 @@ const T = {
     packs:['Frasco para teste e áreas menores.','Bombona para a safra em curso.','Bombona para operação em escala.'],
     func:{surf:'Surfactante',oil:'Óleo mineral',water:'Condicionador de água',foam:'Antiespumante',deslo:'Desalojante',sun:'Fotoproteção',nat:'Natural'},
     alvo:{fung:'Fungicida',inse:'Inseticida',herb:'Herbicida',nema:'Nematicida',bact:'Bactericida',plant:'Planta'},
+    novo:'Novidade',
   },
   EN: {
     heroEyebrow:'Technology for growers', heroTitle:'Technology in the field, control in the crop.',
@@ -488,6 +498,7 @@ const T = {
     packs:['Bottle for trials and smaller areas.','Jug for the current season.','Jug for large-scale operations.'],
     func:{surf:'Surfactant',oil:'Mineral oil',water:'Water conditioner',foam:'Antifoam',deslo:'Dislodging agent',sun:'Sun protection',nat:'Natural'},
     alvo:{fung:'Fungicide',inse:'Insecticide',herb:'Herbicide',nema:'Nematicide',bact:'Bactericide',plant:'Plant'},
+    novo:'New',
   },
   ES: {
     heroEyebrow:'Tecnología para el productor', heroTitle:'Tecnología en el campo, control en el cultivo.',
@@ -516,11 +527,13 @@ const T = {
     packs:['Frasco para pruebas y áreas pequeñas.','Bidón para la campaña en curso.','Bidón para operación a gran escala.'],
     func:{surf:'Surfactante',oil:'Aceite mineral',water:'Acondicionador de agua',foam:'Antiespumante',deslo:'Desalojante',sun:'Fotoprotección',nat:'Natural'},
     alvo:{fung:'Fungicida',inse:'Insecticida',herb:'Herbicida',nema:'Nematicida',bact:'Bactericida',plant:'Planta'},
+    novo:'Novedad',
   },
 };
 
 // Per-product copy. tag/short/what/benefits per language; dose overrides where units have words.
-// Especialidades primeiro (prime, insect, green, sun), depois a linha de base de preparo da calda.
+// Especialidades primeiro (prime, insect, radix, green, sun), depois a linha de base de preparo da calda.
+// novo:true mostra o selo de novidade nos cards e na página do produto.
 const PRODUCTS = [
   { slug:'prime', name:'CROPNEX PRIME', func:'surf', alvos:['fung','bact'], dose:'300–500 ml/ha',
     PT:{tag:'Especialidade · Fungos e bactérias',short:'Tecnologia para fungicidas e bactericidas: película protetora e ação prolongada na folha.',what:'Especialidade desenvolvida para fungicidas e bactericidas. Forma uma película protetora sobre a folha que mantém o produto agindo por mais tempo e reforça o controle de fungos e bactérias.',benefits:['Película protetora sobre a superfície foliar','Ação prolongada de fungicidas e bactericidas','Cobertura uniforme da folha']},
@@ -530,6 +543,10 @@ const PRODUCTS = [
     PT:{tag:'Especialidade · Controle de pragas',short:'Desaloja e expõe a praga ao inseticida, com ação sobre ovos, larvas, ninfas e adultos.',what:'Tecnologia para inseticidas e nematicidas. Tira a praga do abrigo e a expõe ao tratamento, ampliando o controle sobre ovos, larvas, ninfas e adultos.',benefits:['Desaloja e expõe a praga','Ação sobre ovos, larvas, ninfas e adultos','Controle mais amplo com inseticidas e nematicidas']},
     EN:{tag:'Specialty · Pest control',short:'Dislodges the pest and exposes it to the insecticide, acting on eggs, larvae, nymphs and adults.',what:'Technology for insecticides and nematicides. It drives the pest out of hiding and exposes it to the treatment, extending control over eggs, larvae, nymphs and adults.',benefits:['Dislodges and exposes the pest','Acts on eggs, larvae, nymphs and adults','Broader control with insecticides and nematicides']},
     ES:{tag:'Especialidad · Control de plagas',short:'Desaloja la plaga y la expone al insecticida, con acción sobre huevos, larvas, ninfas y adultos.',what:'Tecnología para insecticidas y nematicidas. Saca la plaga de su refugio y la expone al tratamiento, ampliando el control sobre huevos, larvas, ninfas y adultos.',benefits:['Desaloja y expone la plaga','Acción sobre huevos, larvas, ninfas y adultos','Control más amplio con insecticidas y nematicidas']} },
+  { slug:'radix', name:'CROPNEX RADIX', novo:true, func:['nat'], alvos:['nema','inse'], dose:'200–400 ml/ha',
+    PT:{tag:'Especialidade · Controle de nematoides',short:'Leva o nematicida até a zona das raízes, com extrato de algas que potencializa a ação do tratamento.',what:'Tecnologia para nematicidas e inseticidas. O RADIX melhora a distribuição e a penetração do nematicida no solo e na zona das raízes, aumentando o contato do produto com o nematoide. O extrato de algas potencializa a ação do tratamento.',benefits:['Melhor distribuição do nematicida no solo e nas raízes','Mais contato do produto com o nematoide','Extrato de algas que potencializa a ação do tratamento']},
+    EN:{tag:'Specialty · Nematode control',short:'Carries the nematicide to the root zone, with seaweed extract that boosts the action of the treatment.',what:'Technology for nematicides and insecticides. RADIX improves the distribution and penetration of the nematicide in the soil and the root zone, increasing contact between the product and the nematode. The seaweed extract boosts the action of the treatment.',benefits:['Better nematicide distribution in the soil and roots','More contact between the product and the nematode','Seaweed extract that boosts the action of the treatment']},
+    ES:{tag:'Especialidad · Control de nematodos',short:'Lleva el nematicida hasta la zona de las raíces, con extracto de algas que potencia la acción del tratamiento.',what:'Tecnología para nematicidas e insecticidas. RADIX mejora la distribución y la penetración del nematicida en el suelo y en la zona de las raíces, aumentando el contacto del producto con el nematodo. El extracto de algas potencia la acción del tratamiento.',benefits:['Mejor distribución del nematicida en el suelo y las raíces','Más contacto del producto con el nematodo','Extracto de algas que potencia la acción del tratamiento']} },
   { slug:'green', name:'CROPNEX GREEN', func:'nat', alvos:['inse'], dose:'100–350 ml/ha',
     PT:{tag:'Especialidade · MIP',short:'Óleo essencial de citronela com ação repelente, fumigante e expurgante.',what:'Especialidade à base de óleo essencial de citronela, com ação repelente, fumigante e expurgante. Biodegradável e compatível com programas de MIP.',benefits:['Ação repelente, fumigante e expurgante','Alta espalhabilidade e adesividade','Biodegradável e compatível com MIP']},
     EN:{tag:'Specialty · IPM',short:'Citronella essential oil with repellent, fumigant and flushing action.',what:'Specialty based on citronella essential oil, with repellent, fumigant and flushing action. Biodegradable and compatible with IPM programs.',benefits:['Repellent, fumigant and flushing action','High spreading and adhesion','Biodegradable and IPM compatible']},
@@ -569,7 +586,8 @@ const PRODUCTS = [
 ];
 const FUNCS = ['surf','oil','water','foam','deslo','sun','nat'];
 const ALVOS = ['fung','inse','herb','nema','bact'];
-const FEATURED = ['prime','insect','green'];
+// Ordem dos destaques na home (a novidade vem primeiro).
+const FEATURED = ['radix','prime','insect','green'];
 const PAGES = ['home','empresa','produtos','conteudo','downloads','contato'];
 const LANG_KEY = 'cropnex-lang';
 // Quebra um título em palavras com atraso escalonado; o trecho após a vírgula ganha a cor de destaque.
@@ -602,6 +620,7 @@ class Component extends DCLogic {
     const c = p[L] || p.PT;
     return { slug:p.slug, name:p.name, funcs:[].concat(p.func), alvos:p.alvos, tag:c.tag, short:c.short, what:c.what, benefits:c.benefits,
       dose: typeof p.dose === 'string' ? p.dose : p.dose[L],
+      newDisp: p.novo ? 'inline-flex' : 'none',
       num:String(i+1).padStart(2,'0'), open:()=>this.go('produto', p.slug),
       img: base+'x.png', img1l: base+'2.png',
       imgs: { line:base+'x.png', '1 L':base+'2.png', '5 L':base+'1.png', '20 L':base+'3.png' },
@@ -629,8 +648,8 @@ class Component extends DCLogic {
       goConteudo:()=>this.go('conteudo'), goDownloads:()=>this.go('downloads'), goContato:()=>this.go('contato'),
       waLink: wa(t.waHello),
       steps: t.steps.map(([tt,d],i)=>({ n:String(i+1).padStart(2,'0'), t:tt, d })),
-      featured: all.filter(p=>FEATURED.includes(p.slug)),
-      numbers: ['25+','12','11'].map((v,i)=>({ v, l:t.numbers[i] })),
+      featured: FEATURED.map(slug=>all.find(p=>p.slug===slug)).filter(Boolean),
+      numbers: ['25+','12',String(PRODUCTS.length)].map((v,i)=>({ v, l:t.numbers[i] })),
       mainCls: s.page==='home' ? '' : 'cx-pad',
       heroWords, heroTextDelay: (0.55 + heroWords.length*0.055)+'s', heroCtaDelay: (0.65 + heroWords.length*0.055)+'s',
       empWords: splitWords(t.empresaTitle, 0.2),
