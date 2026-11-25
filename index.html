@@ -178,7 +178,7 @@ button{font-family:inherit}
               <h3 style="font:700 26px/1.05 Archivo,sans-serif;letter-spacing:-.025em;color:#3A2E23;margin:0 0 12px">{{ p.name }}</h3>
               <p style="font:400 15px/1.6 Archivo,sans-serif;color:#6b5c4a;margin:0 0 22px;flex:1;text-wrap:pretty">{{ p.short }}</p>
               <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #e6ddcd;padding-top:16px">
-                <span style="font:500 11.5px/1 'JetBrains Mono',monospace;color:#8d7f6d">{{ p.dose }}</span>
+                <span style="font:500 11.5px/1.45 'JetBrains Mono',monospace;color:#8d7f6d;white-space:pre-line">{{ p.dose }}</span>
                 <a onClick="{{ p.open }}" style="font:600 13.5px/1 Archivo,sans-serif;color:#3A2E23">{{ t.seeProduct }}</a>
               </div>
             </div>
@@ -281,7 +281,7 @@ button{font-family:inherit}
             <h3 style="font:700 22px/1.08 Archivo,sans-serif;letter-spacing:-.02em;color:#3A2E23;margin:0 0 10px">{{ p.name }}</h3>
             <p style="font:400 14.5px/1.55 Archivo,sans-serif;color:#6b5c4a;margin:0 0 18px;flex:1;text-wrap:pretty">{{ p.short }}</p>
             <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid #e6ddcd;padding-top:14px">
-              <span style="font:500 11px/1 'JetBrains Mono',monospace;color:#8d7f6d">{{ p.dose }}</span>
+              <span style="font:500 11px/1.45 'JetBrains Mono',monospace;color:#8d7f6d;white-space:pre-line">{{ p.dose }}</span>
               <a onClick="{{ p.open }}" style="font:600 13px/1 Archivo,sans-serif;color:#3A2E23">{{ t.details }}</a>
             </div>
           </div>
@@ -328,7 +328,7 @@ button{font-family:inherit}
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:34px">
         <div style="background:#FBF7F0;border:1px solid #e6ddcd;border-radius:10px;padding:18px 20px">
           <div style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d7f6d;margin-bottom:10px">{{ t.dose }}</div>
-          <div style="font:700 20px/1.2 Archivo,sans-serif;color:#3A2E23">{{ cur.dose }}</div>
+          <div style="font:700 20px/1.2 Archivo,sans-serif;color:#3A2E23;white-space:pre-line">{{ cur.dose }}</div>
         </div>
         <div style="background:#FBF7F0;border:1px solid #e6ddcd;border-radius:10px;padding:18px 20px">
           <div style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d7f6d;margin-bottom:10px">{{ t.indicated }}</div>
@@ -543,7 +543,7 @@ const PRODUCTS = [
     PT:{tag:'Especialidade · Controle de pragas',short:'Desaloja e expõe a praga ao inseticida, com ação sobre ovos, larvas, ninfas e adultos.',what:'Tecnologia para inseticidas e nematicidas. Tira a praga do abrigo e a expõe ao tratamento, ampliando o controle sobre ovos, larvas, ninfas e adultos.',benefits:['Desaloja e expõe a praga','Ação sobre ovos, larvas, ninfas e adultos','Controle mais amplo com inseticidas e nematicidas']},
     EN:{tag:'Specialty · Pest control',short:'Dislodges the pest and exposes it to the insecticide, acting on eggs, larvae, nymphs and adults.',what:'Technology for insecticides and nematicides. It drives the pest out of hiding and exposes it to the treatment, extending control over eggs, larvae, nymphs and adults.',benefits:['Dislodges and exposes the pest','Acts on eggs, larvae, nymphs and adults','Broader control with insecticides and nematicides']},
     ES:{tag:'Especialidad · Control de plagas',short:'Desaloja la plaga y la expone al insecticida, con acción sobre huevos, larvas, ninfas y adultos.',what:'Tecnología para insecticidas y nematicidas. Saca la plaga de su refugio y la expone al tratamiento, ampliando el control sobre huevos, larvas, ninfas y adultos.',benefits:['Desaloja y expone la plaga','Acción sobre huevos, larvas, ninfas y adultos','Control más amplio con insecticidas y nematicidas']} },
-  { slug:'radix', name:'CROPNEX RADIX', novo:true, func:['nat'], alvos:['nema','inse'], dose:'200–400 ml/ha',
+  { slug:'radix', name:'CROPNEX RADIX', novo:true, func:['nat'], alvos:['nema','inse'], dose:{PT:'100–250 ml/ha (anuais)\n400–600 ml/ha (perenes)',EN:'100–250 ml/ha (annuals)\n400–600 ml/ha (perennials)',ES:'100–250 ml/ha (anuales)\n400–600 ml/ha (perennes)'},
     PT:{tag:'Especialidade · Controle de nematoides',short:'Leva o nematicida até a zona das raízes, com extrato de algas que potencializa a ação do tratamento.',what:'Tecnologia para nematicidas e inseticidas. O RADIX melhora a distribuição e a penetração do nematicida no solo e na zona das raízes, aumentando o contato do produto com o nematoide. O extrato de algas potencializa a ação do tratamento.',benefits:['Melhor distribuição do nematicida no solo e nas raízes','Mais contato do produto com o nematoide','Extrato de algas que potencializa a ação do tratamento']},
     EN:{tag:'Specialty · Nematode control',short:'Carries the nematicide to the root zone, with seaweed extract that boosts the action of the treatment.',what:'Technology for nematicides and insecticides. RADIX improves the distribution and penetration of the nematicide in the soil and the root zone, increasing contact between the product and the nematode. The seaweed extract boosts the action of the treatment.',benefits:['Better nematicide distribution in the soil and roots','More contact between the product and the nematode','Seaweed extract that boosts the action of the treatment']},
     ES:{tag:'Especialidad · Control de nematodos',short:'Lleva el nematicida hasta la zona de las raíces, con extracto de algas que potencia la acción del tratamiento.',what:'Tecnología para nematicidas e insecticidas. RADIX mejora la distribución y la penetración del nematicida en el suelo y en la zona de las raíces, aumentando el contacto del producto con el nematodo. El extracto de algas potencia la acción del tratamiento.',benefits:['Mejor distribución del nematicida en el suelo y las raíces','Más contacto del producto con el nematodo','Extracto de algas que potencia la acción del tratamiento']} },
